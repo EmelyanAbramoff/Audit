@@ -1,0 +1,177 @@
+<ion-view title="Audit">
+
+    <ion-nav-bar class="header ui-header ui-bar-none" align-title="center" >
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <a href="#" class="logout-icon ui-link button" ng-click="logout()"></a>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-header-bar class="header ui-header ui-bar-none" align-title="center" >
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <a href="#" class="logout-icon ui-link button"></a>
+        </ion-nav-buttons>
+    </ion-header-bar>
+
+    <ion-content class="ion-content-audit-question" padding="false">
+        <div data-role="page" class="page-background auditsectionbg ui-page ui-page-theme-a ui-page-active" data-url="auditq2" tabindex="0">
+            <div role="main" class="content-bgshadow">
+                <div class="banner-text">
+                    <div class="ui-grid-b banner-grid">
+                        <div class="ui-block-a {{nth>0?'':'invisible'}}" > <a ng-click="prev()" class="qback ui-link"></a> </div>
+                        <div class="ui-block-b">
+                            <h3>{{section.name||" "}}</h3>
+                            <p>Question {{nth+1}} of {{questions.length}}</p>
+                        </div>
+                        <div class="ui-block-c {{nth<questions.length-1?'':'invisible'}}"> <a ng-click="next()" class="qnext ui-link"></a> </div>
+                    </div>
+                </div>
+                <form method="post" enctype="multipart/form-data" data-ajax="false" action="">
+                    <div class="ui-body content-bgshadow">
+                        <div class="auditsection-description">
+                            <a ng-class="{check:answer.app_data.is_answered, note: !answer.app_data.is_answered}" ng-click="alert_status()"></a>
+                            <p>
+                                {{question.text}}
+                                <span ng-if="question.min_char&&question.min_char>0">&nbsp; A text answer of at least {{question.min_char}} is required.</span>
+                            </p>
+                        </div>
+
+                        <div class="ui-field-groups" ng-if="question.answer_type=='datetime'">
+                            <div class="ui-field-contain">
+                                <label for="new_date">Date</label>
+                                <div ng-click="pick_date()" class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
+                                    <input ng-model="datetime.date"  name="new_date" type="text" data-role="datebox" data-options="{&quot;mode&quot;:&quot;calbox&quot;, &quot;defaultValue&quot;:&quot;2015-06-23&quot;}" readonly="readonly">
+                                    <a href="#" class="ui-input-clear ui-btn ui-icon-calendar ui-btn-icon-notext ui-corner-all" title="Open Date Picker">Open Date Picker</a>
+                                </div>
+                            </div>
+                            <div class="ui-field-contain">
+                                <label for="new_time">Time</label>
+                                <div ng-click="pick_time()" class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
+                                    <input ng-model="datetime.time" name="new_time" type="text" data-role="datebox" data-options="{&quot;mode&quot;:&quot;timebox&quot; ,&quot;defaultValue&quot;:&quot;07:01 AM&quot;}" readonly="readonly">
+                                    <a href="#" class="ui-input-clear ui-btn ui-icon-clock ui-btn-icon-notext ui-corner-all" title="Open Date Picker">Open Date Picker</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui-field-groups" ng-if="question.answer_type=='picker'" >
+                            <fieldset data-role="none" data-mini="true" class="content-radioicon">
+                                <div class="ui-radio ui-mini button" ng-repeat="qans in question.answers" ng-click="pick_picker(qans.answerid)"  >
+                                    <label for="answer_id{{qans.answerid}}" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left {{answer.answer_id==qans.answerid?'ui-radio-on':'ui-radio-off'}}">{{qans.answerlabel}}</label>
+                                    <input type="radio" value="{{qans.answerid}}" data-cacheval="true" />
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="ui-field-groups" ng-if="question.answer_type=='segmented'" >
+                            <fieldset data-role="none" data-mini="true" class="content-radioicon">
+                                <div class="ui-radio ui-mini button" ng-repeat="qans in question.answers" ng-click="pick_seqment(qans.answerid)"  >
+                                    <input type="radio" name="answer_id" value="{{qans.answerid}}" data-cacheval="true" />
+                                    <label for="answer_id{{qans.answerid}}" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left {{answer.answer_id==qans.answerid?'ui-radio-on':'ui-radio-off'}}">{{qans.answerlabel}}</label>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="ui-field-groups" ng-if="question.answer_type=='text'">
+                            <BR>
+                            <textarea cols="40" rows="6" name="free_answer" 
+                                ng-model="answer.free_answer"
+                                class="ui-input-text ui-shadow-inset ui-body-inherit ui-corner-all ui-textinput-autogrow">
+                            </textarea>
+                        </div>
+
+                        <div class="ui-field-groups" ng-if="question.answer_type=='check_all'" >
+                            <fieldset data-role="none" data-mini="true" class="content-radioicon">
+                                <div class="ui-radio ui-mini button" ng-repeat="qans in question.answers" ng-click="pick_check_all(qans.answerid)"  >
+                                    <input type="radio" name="answer_id" value="{{qans.answerid}}" data-cacheval="true" />
+                                    <label for="answer_id{{qans.answerid}}" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left {{bind_check_status(qans.answerid)?'ui-radio-on':'ui-radio-off'}}">{{qans.answerlabel}}</label>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div class="ui-field-groups" ng-if="question.answer_type=='date'">
+                            <div class="ui-field-contain">
+                                <label for="new_date">Date</label>
+                                <div ng-click="pick_date()" class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
+                                    <input ng-model="datetime.date"  name="new_date" type="text" data-role="datebox" data-options="{&quot;mode&quot;:&quot;calbox&quot;, &quot;defaultValue&quot;:&quot;2015-06-23&quot;}" readonly="readonly">
+                                    <a href="#" class="ui-input-clear ui-btn ui-icon-calendar ui-btn-icon-notext ui-corner-all" title="Open Date Picker">Open Date Picker</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ui-field-groups" ng-if="question.answer_type=='time'">
+                            <div class="ui-field-contain">
+                                <label for="new_time">Time</label>
+                                <div ng-click="pick_time()" class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset ui-input-has-clear">
+                                    <input ng-model="datetime.time" name="new_time" type="text"  readonly="readonly">
+                                    <a href="#" class="ui-input-clear ui-btn ui-icon-clock ui-btn-icon-notext ui-corner-all" title="Open Date Picker">Open Date Picker</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui-field-groups" ng-if="question.answer_type=='receipt'">
+                            <BR>
+                            <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">
+                                <input type="text" ng-model="answer.free_answer" />
+                            </div>
+                        </div>
+
+                        <div class="ui-field-groups" ng-if="question.answer_type=='elapsed'">
+                            <BR>
+                            <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">
+                                <input type="text" ng-bind="bind_elapsed()" ng-model="data.elapsed" />
+                            </div>
+                        </div>
+
+                        <div class="ui-field-groups" ng-if="question.answer_type=='price'" >
+                            <div class="ui-select">
+                                <div class="ui-btn ui-icon-carat-d ui-btn-icon-right ui-corner-all ui-shadow">
+                                    <span ng-bind="bind_price_answer_label()" ></span>
+                                    <select ng-options="qans.answerid as qans.answerlabel for qans in question.answers" ng-model="answer.answer_id">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="customtextbox">
+                                <div class="auditsection-description">Price: </div>
+                                <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset">
+                                    <input type="text" ng-model="answer.price" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <br>
+                    <div ng-if="question.allow_comment != 'N' && question.answer_type != 'text' " >
+                        <textarea 
+                            cols="40" 
+                            rows="4" 
+                            name="comment" 
+                            placeholder="Please Comment..." 
+                            ng-model="answer.comment" 
+                            ng-change="change_picker()"
+                            class="ui-input-text ui-shadow-inset ui-body-inherit ui-corner-all ui-textinput-autogrow" ></textarea>
+                    </div>
+                    <div class="button button-block" 
+                        ng-if="question.allow_photo != 'No' || question.photo_required == 'Yes'"
+                        ng-click="select_image();" >
+                        <span class="greenbtn">
+                            <span class="galphotoicon"></span>
+                            Photo {{question.photo_required=='Yes'?"Required":"Optional"}} Choose...
+                        </span>
+                    </div>
+                    <!--<input type="hidden" id="step" name="step" value="">-->
+                </form>
+            </div> <!-- /main-->
+        </div>
+    </ion-content>
+</ion-view>

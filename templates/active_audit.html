@@ -1,0 +1,77 @@
+<ion-view title="Active Audit">
+
+    <ion-nav-bar class="header ui-header ui-bar-none" align-title="center" >
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <a href="#" class="logout-icon ui-link button" ng-click="logout()"></a>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-header-bar class="header ui-header ui-bar-none" align-title="center" >
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <a href="#" class="logout-icon ui-link button"></a>
+        </ion-nav-buttons>
+    </ion-header-bar>
+
+    <ion-content class="ion-content-active-audit" padding="false">
+        <div data-role="page" id="auditsection" class="page-background auditsectionbg ui-page ui-page-theme-a ui-page-active" data-url="auditsection" tabindex="0">
+            <div role="main" class="content-bgshadow">
+                <div class="ui-body auditsectioncontent">
+                    <div class="pagethumb">
+                        <ul>
+                            <li>
+                                <div class="thumbnail"><img src="{{audit.logo}}" alt=""></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <h2>{{audit.location}}</h2>
+                    <p>{{audit.address_full}}</p>
+                    <h3>{{audit.phone}}</h3>
+                    <div class="auditsection-iconset">
+                        <ul>
+                            <li><a href="" class="start-icon ui-link button" ng-click="start_audit()" ></a></li>
+                            <li><a href="" class="cancel-icon ui-link button" ng-click="cancel_audit()"></a></li>
+                            <li><a href="" class="location-icon ui-link button" ng-click="show_map()"></a></li>
+                            <li><a href="" class="phone-icon ui-link button" ng-click="call_phone()"></a></li>
+                        </ul>
+                    </div>
+                    <hr class="auditsection-hr">
+                    <div class="ui-grid-b auditsection-grid">
+                        <div class="ui-block-a">
+                            <p> Distance<br>
+                            <b>{{audit.distance}}</b> </p>
+                        </div>
+                        <div class="ui-block-b">
+                            <p> Audit Title<br>
+                            <b>{{audit.title}}</b> </p>
+                        </div>
+                        <div class="ui-block-c">
+                            <p> Checked Out<br>
+                            <b>{{audit.assigned_date}}</b> </p>
+                        </div>
+                    </div>
+                    <hr class="auditsection-hr">
+                    <!-- /grid-b -->
+                    <div class="auditsection-description">
+                        <p>Press the start button when you are ready to begin your audit. You can exit the audit any time and with on another audit. Please save work frequently. <br>
+                            <br>
+                            <b>Click the submit button as soon as you are finish.</b> <br>
+                            <br>
+                            You can hit cancel at any time. This will remove the audit from your device and your work will be lost</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

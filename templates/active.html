@@ -1,0 +1,60 @@
+<ion-view title="Active Audit">
+
+    <ion-nav-bar class="header ui-header ui-bar-none" align-title="center" >
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <a href="#" class="logout-icon ui-link button" ng-click="logout()"></a>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-header-bar class="header ui-header ui-bar-none" align-title="center" >
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <a href="#" class="logout-icon ui-link button" ng-click="logout()"></a>
+        </ion-nav-buttons>
+    </ion-header-bar>
+
+    <ion-nav-title>
+        <a href="#" class="pageavaudit-icon ui-link"></a>
+    </ion-nav-title>
+
+    <div class="ui-body banner-text">
+        <h3>Active Audits</h3>
+        <p>This is a list of your current active audits. Please finalize them when they are complete and they will be removed from your list. If you wish to cancel them and delete your data, select audit and hit cancel</p>
+    </div>
+
+    <ion-content class="ion-content-active ion-content-avail-audit" padding="false">
+        <div data-role="page" id="" data-url="availableauditinner"  tabindex="0" class="ui-mobile ui-page ui-page-theme-a ui-page-active">
+            <div role="main">
+                <div class="ui-body available-items content-bgshadow">
+                    <ul>
+                        <li class="button text-left" ng-repeat="audit in audits" ng-click="click_audit(audit)" >
+                            <h3>{{audit.title}}</h3>
+                            <div class="thumbnail"><img src="{{audit.logo}}" alt=""></div>
+                            <div class="info">
+                                <h4>{{audit.location}}</h4>
+                                <p>{{audit.address}}<br>Distance: {{audit.distance}}<br>Audit Checked Out: {{audit.date_details}}<br>Audit Id: #{{audit.id}}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /content -->
+            <ion-infinite-scroll
+                on-infinite="loadMore()"
+                distance="1%"
+                ng-if="moreDataCanBeLoaded()" >
+            </ion-infinite-scroll>
+        </div>
+    </ion-content>
+</ion-view>

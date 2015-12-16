@@ -1,0 +1,21 @@
+<ion-view title="Login" >
+
+    <ion-nav-bar class="header ui-header ui-bar-none" align-title="center" >
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+
+    <ion-content padding="false" class="login-ion-content fullpage">
+        <div class="v-center" >
+            <div data-role="page" id="login" class="ui-page ui-page-theme-a ui-page-active" data-url="login" tabindex="0" >
+                <div role="main" class="content-login">
+                    <div class="ui-body auditsectioncontent">
+                        <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset"><input type="text" name="text-basic" id="aaaa" placeholder="User Name" ng-model="loginForm.username"></div>
+                        <div class="ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset"><input type="password" name="text-basic" id="bbbb" placeholder="Password" ng-model="loginForm.password"></div>
+                    </div>
+                </div>
+                <a href="#" class="greenbtn ui-link button" ng-click="login()" >Submit</a> 
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

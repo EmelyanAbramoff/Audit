@@ -1,0 +1,66 @@
+<ion-view title="Available Audit">
+
+    <ion-nav-bar class="header ui-header ui-bar-none" align-title="center" >
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <a href="#" class="logout-icon ui-link button"></a>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-header-bar class="header ui-header ui-bar-none" align-title="center" >
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <a href="#" class="logout-icon ui-link button" ng-click="logout()"></a>
+        </ion-nav-buttons>
+    </ion-header-bar>
+
+    <ion-nav-title>
+        <a href="#" class="pageavailable-icon ui-link"></a>
+    </ion-nav-title>
+
+    <div class="ui-body banner-text">
+        <h3>Available Audits</h3>
+        <p>Click the audit you would like added to your active audit list</p>
+    </div>
+
+    <a href="#" class="greenbtn ui-link banner-bottom button" ng-click="add_audit()">Add to active audit list</a>
+
+    <ion-content class="ion-content-avail ion-content-avail-audit" padding="false">
+        <div data-role="page" id="availableauditinner" data-url="availableauditinner" tabindex="0" class="ui-mobile ui-page ui-page-theme-a ui-page-active">
+            <div role="main">
+                <div class="ui-body available-items content-bgshadow">
+                    <ul>
+                        <li class="button text-left" collection-repeat="audit in audits" ng-click="click_audit($index)" >
+                            <h3>{{audit.title}}</h3>
+                            <div class="thumbnail"><img src="{{audit.logo}}" alt=""></div>
+                            <div class="availableaudit-radio">
+                                <fieldset data-role="none" data-mini="true" class="content-radioicon single-radioicon">
+                                    <div class="ui-checkbox ui-mini"><label for="checkbox-4b" class="ui-btn ui-corner-all ui-btn-inherit ui-btn-icon-left {{audit.selected?'ui-checkbox-on':'ui-checkbox-off'}}"></label><input type="checkbox" name="checkbox-4b" id="checkbox-4b" checked=""></div>
+                                </fieldset>
+                            </div>
+                            <div class="info">
+                                <h4>{{audit.location}}</h4>
+                                <p>{{audit.address}}<br>Distance: {{audit.distance}}<br>Audit Checked Out: {{audit.date_details}}<br>Audit Id: #{{audit.id}}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /content -->
+        </div>
+
+    </ion-content>
+
+
+
+</ion-view>

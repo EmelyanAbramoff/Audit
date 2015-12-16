@@ -1,0 +1,55 @@
+<ion-view title="{{title}}">
+
+    <ion-nav-bar class="header ui-header ui-bar-none" align-title="left" >
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <a href="#" class="logout-icon ui-link button" ng-click="logout()"></a>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    
+    <ion-header-bar class="header ui-header ui-bar-none" align-title="left" >
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <a href="#" class="logout-icon ui-link button"></a>
+        </ion-nav-buttons>
+    </ion-header-bar>
+
+    <ion-content padding="false" class="home-ion-content">
+        <div data-role="page" id="home" class="homebg ui-page ui-page-theme-a ui-page-active" data-url="home" tabindex="0" >
+            <div role="main">
+                <div class="ui-body">
+
+                    <div class="homeiconholder">
+                        <ul>
+                            <li class="button" ng-click="on_btn_click_avail()" >
+                                <a href="#availableaudit" class="ui-link"><img src="images/availableaudit-icon.png"></a><!--
+                                --><span>Available Audits</span>
+                            </li>
+                            <li class="button" ng-click="on_btn_click_active()">
+                                <a href="" class="ui-link"><img src="images/activeaudit-icon.png"></a><!--
+                                --><span>Active Audits</span>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li class="button" ng-click="on_btn_click_contact()" >
+                                <a href="" class="ui-link"><img src="images/contact-icon.png"></a><!--
+                                --><span>Contact Account Manager</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

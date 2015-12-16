@@ -1,0 +1,53 @@
+<ion-view title="Audit Sections">
+
+    <ion-nav-bar class="header ui-header ui-bar-none" align-title="center" >
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <a href="#" class="logout-icon ui-link button" ng-click="logout()"></a>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-header-bar class="header ui-header ui-bar-none" align-title="center" >
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+            </button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <a href="#" class="logout-icon ui-link button"></a>
+        </ion-nav-buttons>
+    </ion-header-bar>
+
+    <a href="#" class="greenbtn ui-link banner-bottom button" ng-click="save()" ng-bind="btn_save_label()" >Save Work</a>
+
+    <ion-content class="ion-content-audit-section" padding="false">
+        <div data-role="page" id="auditsectionquestions" class="auditsectionquestions page-background ui-page ui-page-theme-a ui-page-active" data-url="auditsectionquestions" tabindex="0">
+            <div role="main" class="content-bgshadow">
+                <div class="ui-body auditsectionquestions-content">
+                    <p>Complete the questions in each section then click <span>‘Check for Errors’</span>. Once your audit is free from errors you may submit. Save your work frequently. </p>
+                    <div class="auditsectionquestionsholder">
+                        <ul>
+                            <li class="button" ng-repeat="section in sections" item-width="50%" item-height="233px" ng-click="start_section(section)" >
+                                <a href="#" class="ui-link"><img src="{{icons[$index]}}" alt="">
+                                    <p>{{section.unanswered}}</p>
+                                </a> 
+                                <span>{{section.name}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--<ion-infinite-scroll
+                on-infinite="loadMore()"
+                distance="1%"
+                ng-if="moreDataCanBeLoaded()" >
+            </ion-infinite-scroll>-->
+        </div>
+    </ion-content>
+</ion-view>
